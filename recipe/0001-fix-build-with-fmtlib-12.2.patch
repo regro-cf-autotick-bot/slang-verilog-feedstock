@@ -1,0 +1,105 @@
+From 5a898b4b9225d281902fcd59fe4732b1561677d2 Mon Sep 17 00:00:00 2001
+From: Michael Popoloski <michael.popoloski@gmail.com>
+Date: Fri, 19 Jun 2026 15:03:01 -0700
+Subject: [PATCH] Fix build with fmtlib 12.2 (#1878)
+
+Backported to v11.0.
+
+diff --git a/bindings/python/pyslang.h b/bindings/python/pyslang.h
+--- a/bindings/python/pyslang.h
++++ b/bindings/python/pyslang.h
+@@ -8 +8 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+diff --git a/include/slang/util/CommandLine.h b/include/slang/util/CommandLine.h
+--- a/include/slang/util/CommandLine.h
++++ b/include/slang/util/CommandLine.h
+@@ -12 +12 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+diff --git a/source/analysis/AbstractFlowAnalysis.cpp b/source/analysis/AbstractFlowAnalysis.cpp
+--- a/source/analysis/AbstractFlowAnalysis.cpp
++++ b/source/analysis/AbstractFlowAnalysis.cpp
+@@ -10 +10 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+diff --git a/source/ast/Compilation.cpp b/source/ast/Compilation.cpp
+--- a/source/ast/Compilation.cpp
++++ b/source/ast/Compilation.cpp
+@@ -12 +12 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+diff --git a/source/ast/statements/ConditionalStatements.cpp b/source/ast/statements/ConditionalStatements.cpp
+--- a/source/ast/statements/ConditionalStatements.cpp
++++ b/source/ast/statements/ConditionalStatements.cpp
+@@ -10 +10 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+diff --git a/source/ast/symbols/MemberSymbols.cpp b/source/ast/symbols/MemberSymbols.cpp
+--- a/source/ast/symbols/MemberSymbols.cpp
++++ b/source/ast/symbols/MemberSymbols.cpp
+@@ -11 +11 @@
+-#include "fmt/core.h"
++#include "fmt/format.h"
+diff --git a/source/driver/SourceLoader.cpp b/source/driver/SourceLoader.cpp
+--- a/source/driver/SourceLoader.cpp
++++ b/source/driver/SourceLoader.cpp
+@@ -10 +10 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+diff --git a/source/numeric/SVInt.cpp b/source/numeric/SVInt.cpp
+--- a/source/numeric/SVInt.cpp
++++ b/source/numeric/SVInt.cpp
+@@ -12 +12 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+diff --git a/source/numeric/Time.cpp b/source/numeric/Time.cpp
+--- a/source/numeric/Time.cpp
++++ b/source/numeric/Time.cpp
+@@ -11 +11 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+diff --git a/source/parsing/Lexer.cpp b/source/parsing/Lexer.cpp
+--- a/source/parsing/Lexer.cpp
++++ b/source/parsing/Lexer.cpp
+@@ -11 +11 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+diff --git a/source/util/CommandLine.cpp b/source/util/CommandLine.cpp
+--- a/source/util/CommandLine.cpp
++++ b/source/util/CommandLine.cpp
+@@ -12 +12 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+diff --git a/source/util/TimeTrace.cpp b/source/util/TimeTrace.cpp
+--- a/source/util/TimeTrace.cpp
++++ b/source/util/TimeTrace.cpp
+@@ -11 +11 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+diff --git a/source/util/Util.cpp b/source/util/Util.cpp
+--- a/source/util/Util.cpp
++++ b/source/util/Util.cpp
+@@ -10 +10 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+diff --git a/tests/unittests/DriverTests.cpp b/tests/unittests/DriverTests.cpp
+--- a/tests/unittests/DriverTests.cpp
++++ b/tests/unittests/DriverTests.cpp
+@@ -5 +5 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+diff --git a/tests/unittests/analysis/CaseAnalysisTests.cpp b/tests/unittests/analysis/CaseAnalysisTests.cpp
+--- a/tests/unittests/analysis/CaseAnalysisTests.cpp
++++ b/tests/unittests/analysis/CaseAnalysisTests.cpp
+@@ -6 +6 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+diff --git a/tests/unittests/parsing/VisitorTests.cpp b/tests/unittests/parsing/VisitorTests.cpp
+--- a/tests/unittests/parsing/VisitorTests.cpp
++++ b/tests/unittests/parsing/VisitorTests.cpp
+@@ -6 +6 @@
+-#include <fmt/core.h>
++#include <fmt/format.h>
+-- 
+2.51.0
