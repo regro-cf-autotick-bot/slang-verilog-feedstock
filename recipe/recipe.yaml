@@ -1,5 +1,6 @@
 context:
   version: "11.0"
+  build_number: 2
 
 recipe:
   name: slang-verilog-packages
@@ -12,13 +13,13 @@ source:
     - 0001-fix-build-with-fmtlib-12.2.patch
 
 build:
-  number: 1
+  number: ${{ build_number }}
 
 outputs:
   - package:
       name: slang-verilog
     build:
-      number: 1
+      number: ${{ build_number }}
       script:
         - if: unix
           then: build.sh
@@ -60,7 +61,7 @@ outputs:
   - package:
       name: slang-systemverilog
     build:
-      number: 1
+      number: ${{ build_number }}
       noarch: generic
       script: "echo 'alias package'"
     requirements:
@@ -73,7 +74,7 @@ outputs:
   - package:
       name: slang-sv
     build:
-      number: 1
+      number: ${{ build_number }}
       noarch: generic
       script: "echo 'alias package'"
     requirements:
@@ -86,7 +87,7 @@ outputs:
   - package:
       name: svlang
     build:
-      number: 1
+      number: ${{ build_number }}
       noarch: generic
       script: "echo 'alias package'"
     requirements:
