@@ -14,13 +14,9 @@ cmake -B build -GNinja ${CMAKE_ARGS} \
     -DBUILD_SHARED_LIBS=ON \
     -DSLANG_USE_SYSTEM_FMT=ON \
     -DSLANG_USE_SYSTEM_BOOST=ON \
+    -DSLANG_USE_SYSTEM_TOMLPLUSPLUS=ON \
     -DFETCHCONTENT_FULLY_DISCONNECTED=ON \
-    -DFETCHCONTENT_SOURCE_DIR_TOMLPLUSPLUS="${SRC_DIR}/tomlplusplus" \
-    -DFETCHCONTENT_SOURCE_DIR_MIMALLOC="${SRC_DIR}/mimalloc" \
     .
 
 cmake --build build -j${CPU_COUNT}
 cmake --install build
-
-# mimalloc is linked statically; drop the files its install rules add
-rm -rf "${PREFIX}"/include/mimalloc-* "${PREFIX}"/lib/mimalloc-* "${PREFIX}"/lib/cmake/mimalloc-* "${PREFIX}"/lib/pkgconfig/mimalloc.pc
