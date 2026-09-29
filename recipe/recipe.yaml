@@ -7,10 +7,16 @@ recipe:
   version: ${{ version }}
 
 source:
-  url: https://github.com/MikePopoloski/slang/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: 64b3eb9d38ee126e009cbb8da0cfa6f68d970334e52ba084ad7c68e4b5fa804c
-  patches:
-    - 0001-fix-build-with-fmtlib-12.2.patch
+  - url: https://github.com/MikePopoloski/slang/archive/refs/tags/v${{ version }}.tar.gz
+    sha256: 64b3eb9d38ee126e009cbb8da0cfa6f68d970334e52ba084ad7c68e4b5fa804c
+  # slang 12 requires tomlplusplus >=3.4, newer than conda-forge's
+  - url: https://github.com/marzer/tomlplusplus/archive/refs/tags/v3.4.0.tar.gz
+    sha256: 8517f65938a4faae9ccf8ebb36631a38c1cadfb5efa85d9a72e15b9e97d25155
+    target_directory: tomlplusplus
+  # slang 12 requires mimalloc >=3.5, newer than conda-forge's
+  - url: https://github.com/microsoft/mimalloc/archive/refs/tags/v3.5.3.tar.gz
+    sha256: 3b4a15153a59905995f7070296ed604bb5ccc00cabb8b93446931aff77224d47
+    target_directory: mimalloc
 
 build:
   number: ${{ build_number }}
@@ -30,14 +36,11 @@ outputs:
         - ${{ compiler('c') }}
         - ${{ compiler('cxx') }}
         - ${{ stdlib('c') }}
-        - cmake >=3.20
+        - cmake >=3.28
         - ninja
         - python
       host:
         - fmt >=12.1
-        - if: not win
-          then:
-            - mimalloc >=2.2
         - libboost-devel
       run:
         - fmt >=12.1
@@ -106,7 +109,10 @@ about:
     It comes with an executable tool that can compile and lint
     SystemVerilog and is also usable as a library to power other tools.
   license: MIT
-  license_file: LICENSE
+  license_file:
+    - LICENSE
+    - tomlplusplus/LICENSE
+    - mimalloc/LICENSE
   repository: https://github.com/MikePopoloski/slang
   documentation: https://sv-lang.com/user-manual.html
 
